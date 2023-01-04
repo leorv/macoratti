@@ -158,3 +158,27 @@ docker container run --name ws2 -p 8080:80 -d nginx
 
 -d é detached.
 
+## Mapeando diretórios para um container
+
+Exemplo, criando uma pasta html no diretório atual e mapeando a porta do html do nginx para esta pasta.
+
+```
+docker container run --name ws3 -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html -d nginx
+```
+
+![Mapeando pastas](./assets/mapeando-pastas.png)
+
+Para vermos os detalhes desta montagem, podemos usar o comando:
+
+```
+docker container inspect ws3
+```
+
+
+
+
+
+
+
+
+
