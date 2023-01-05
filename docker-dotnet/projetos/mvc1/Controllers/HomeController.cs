@@ -4,15 +4,25 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using projeto01.Models;
+using Microsoft.Extensions.Configuration;
+using mvc1.Models;
 
-namespace projeto01.Controllers
+namespace mvc1.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository repository;
+        private string message;
+
+        public HomeController(IRepository repo, IConfiguration config){
+            repository = repo;
+            message = config["MESSAGE"] ?? "ASP .NET Core MVC - Docker";
+        }
+        
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Message = message;
+            return View(repository.Produtos);
         }
 
         public IActionResult About()

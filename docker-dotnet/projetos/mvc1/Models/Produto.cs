@@ -1,17 +1,22 @@
-public class Produto
+using System;
+
+namespace mvc1.Models
 {
-    public int ProdutoId { get; set; }
+    public class Produto
+    {
+        public int ProdutoId { get; set; }
 
-    public string Nome { get; set; }
+        public string Nome { get; set; }
 
-    public string Categoria { get; set; }
+        public string Categoria { get; set; }
 
-    public decimal Preco { get; set; }
+        public decimal Preco { get; set; }
 
-    public Produto(string nome=null, string categoria=null, decimal preco = 0) {
-        this.Nome = nome;
-        this.Preco = preco;
-        this.Categoria = categoria;
+        public Produto(string nome = null, string categoria = null, decimal preco = 0)
+        {
+            this.Nome = nome;
+            this.Preco = preco;
+            this.Categoria = categoria;
+        }
     }
-
 }
