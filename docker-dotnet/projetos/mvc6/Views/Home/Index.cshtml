@@ -1,0 +1,35 @@
+﻿@model IEnumerable<mvc6.Models.Produto>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mvc1</title>
+</head>
+<body>
+    <div class="m-1 p-1" >
+        <h4 class="bg-primary text-xs-center p-1 text-white">
+            @ViewBag.Message
+        </h4>
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr><th>ID</th><th>Nome</th><th>Categoria</th><th>Preço</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in Model)
+                {
+                    <tr>
+                        <td>@produto.ProdutoId</td>
+                        <td>@produto.Nome</td>
+                        <td>@produto.Categoria</td>
+                        <td>@produto.Preco.ToString("F2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
