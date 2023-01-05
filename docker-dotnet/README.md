@@ -40,6 +40,12 @@ indica que o comando vai atuar em um container.
     - Cria o container: `docker container create`
     - Inicializa o container: `docker container start`
     - Uso do modo interativo executa um comando: `docker container exec`
+    
+Para que um contêiner seja excluído assim que ele for executado usamos a flag `--rm` no comando da criação do contêiner:
+
+```
+Docker container run --name teste --rm -it alpine:3.8
+```
 
 
 ## Visualizar os containers
@@ -115,7 +121,7 @@ Pode usar o código completo gerado do container, ou o nome do container, no com
 
 O container vai estar em execução e pode ser verifica com o comando: `docker container ps`
 
-Pode usar também um comando dentro dele com o comando: `docker container exec eaf6 ls -l`
+Pode usar também um comando dentro dele com o comando: `docker container exec eaf6 ls -l` que executará o comando ls -l.
 
 ## Parando um container
 
@@ -174,11 +180,47 @@ Para vermos os detalhes desta montagem, podemos usar o comando:
 docker container inspect ws3
 ```
 
+## Usando um container com .NET Core
 
+Exemplo:
 
+```
+docker container run --name demonet -it mcr.microsoft.com/dotnet/sdk:2.1
+```
 
+Com o comando acima vamos entrar no container no modo interativo com terminal. Podemos sair do container digitando exit.
 
+Para voltar ao container:
 
+```
+docker container start -ia demonet
+```
+
+## Remover todos os containers
+
+```
+docker container prune
+```
+
+Este comando acima vai remover todos os containers parados. Cuidado.
+
+## Remover a imagem
+
+```
+docker image rm <id>
+
+docker image prune
+```
+
+O prune apaga todas as imagens que não estão em uso.
+
+Outra maneira interessante:
+
+```
+docker image $(docker image ls -a -q)
+```
+
+# Imagens
 
 
 
