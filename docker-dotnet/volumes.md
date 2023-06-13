@@ -28,3 +28,27 @@ Exemplo: `-v $(pwd)/teste:/usr/share`
 
 Exemplo com uma imagem do Alpine: `docker container run -it --name alp1 -v $(pwd)/teste:/usr/share alpine`
 
+## Criar um volume
+
+`docker volume create <nome>`
+
+Este comando cria um novo volume que os contêineres podem consumir e onde podem armazenar dados.
+
+Se um nome não for especificado, o Docker vai gerar um nome aleatório.
+
+`docker volume ls`
+
+Neste comando o Docker mostra qual o nome do volume e o seu driver. Geralmente é usado o driver local que é o driver padrão do Docker.
+
+## MySQL
+
+`docker volume create dadosdb`
+
+Agora que temos nosso volume criado, vamos referenciar nosso volume a um container de imagem mySQL.
+
+```
+docker image pull mysql:5.7
+```
+
+
+
