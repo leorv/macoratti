@@ -40,7 +40,7 @@ Se um nome não for especificado, o Docker vai gerar um nome aleatório.
 
 Neste comando o Docker mostra qual o nome do volume e o seu driver. Geralmente é usado o driver local que é o driver padrão do Docker.
 
-## MySQL
+## Exemplo com MySQL
 
 `docker volume create dadosdb`
 
@@ -49,6 +49,62 @@ Agora que temos nosso volume criado, vamos referenciar nosso volume a um contain
 ```
 docker image pull mysql:5.7
 ```
+
+Importante olhar a documentação da imagem no Dockerhub, por exemplo, a variável MYSQL_ROOT_PASSWORD é obrigatória.
+
+### Onde o MySQL armazena os arquivos de dados
+
+Vamos inspecionar a imagem:
+
+`docker image inspect mysql:5.7`
+
+Na saída deste comando vemos a seção Volumes que indica que esta imagem usa o volume para o diretório /var/lib/mysql que é o local onde o MySQL armazena os seus arquivos de dados.
+
+### Criando um container MySQL e mapeando seu volume
+
+`docker container run -d --name mysql -v dadosdb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=numsey mysql:5.7`
+
+E para entrar no container:
+
+`docker container exec -it mysql /bin/bash`
+
+Vai entrar dentro do container, então para entrar dentro do MySQL:
+
+`mysql -u root -p`
+
+Usar a senha numsey.
+
+Aí está dentro do MySQL, pode dar um comando, por exemplo: `show databases;`
+
+`create database macoratti;`
+
+### Removendo
+
+Primeiro, parar o container:
+
+`docker container stop mysql`
+
+Removendo o container:
+
+`docker container rm mysql`
+
+Como fizemos o mapeamento para o volume dadosdb, mesmo removendo este container, os dados estarão salvos no volume.
+
+
+### Conectando a aplicação ASP .NET Core MVC com o MySQL com EF Core
+
+No caso do MySQL, podemos ver nos provedores de banco de dados da documentação da Microsoft, que o Pomelo.EntityFrameworkCore.MySql nos atende.
+
+link: https://learn.microsoft.com/pt-br/ef/core/providers/?tabs=dotnet-core-cli
+
+
+O provedor para o MySQL: `Pomelo.EntityFrameworkCore.MySql`
+
+Permite acesso aos comandos dotnet ef: `Pomelo.EntityFrameworkCore.MySql.Design`
+
+Permite acessar as ferramentas do console do gerenciador de pacotes: `Microsoft.EntityFrameworkCore.Tools`
+
+`dotnet add package <nome_do_pacote_versão>`
 
 
 

@@ -12,7 +12,7 @@
 
 Há duas maneiras de criarmos imagens, com o Dockerfile ou commit. O Commit não é recomendável.
 
-O **Dockerfile** é um arquivo com texto com isntruções, comandos e passos que é executado através do comando *build* para gerar uma imagem.
+O **Dockerfile** é um arquivo com texto com instruções, comandos e passos que é executado através do comando *build* para gerar uma imagem.
 
 ```
 docker build -t <imagem>
@@ -90,3 +90,4 @@ docker image tag redis:latest redis:leo
 docker image build <Dockerfile>
 ```
 
+### 
